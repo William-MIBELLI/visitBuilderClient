@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+
+@theme {
+  --color-bleu: rgb(18 27 90);
+  --color-turquoise: rgb(29 175 173);
+  --color-gris: rgb(231 235 240);
+}

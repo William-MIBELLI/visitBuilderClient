@@ -1,14 +1,15 @@
 
-import { Button } from '@heroui/react'
 import './App.css'
+import MainLayout from './Layout/MainLayout'
+import MapDisplayer from './Components/Map/MapDisplayer'
 
 function App() {
 
   return (
-    <div className='w-screen h-screen flex justify-center items-center'>
-      <Button variant='tertiary'>
-        BOUTONNNN
-      </Button>
+    <div className=''>
+      <MainLayout>
+        <MapDisplayer/>
+      </MainLayout>
     </div>
   )
 }
