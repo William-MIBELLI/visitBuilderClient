@@ -1,5 +1,4 @@
-import { MapPinPlus, Plus } from "lucide-react";
-import React from "react";
+import { MapPinPlus } from "lucide-react";
 
 const CreateButton = () => {
   return (

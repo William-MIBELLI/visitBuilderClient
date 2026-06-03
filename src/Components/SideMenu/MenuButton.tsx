@@ -1,24 +1,25 @@
-import { useState, type FC } from "react";
+import { type FC } from "react";
+import { NavLink } from "react-router-dom";
 
 interface IProps {
   text: string;
   children: React.ReactNode;
-  url?: string;
+  url: string;
 }
 
-const MenuButton: FC<IProps> = ({ text, children }) => {
-  const [isSelected, setIsSelected] = useState<boolean>(false);
-
+const MenuButton: FC<IProps> = ({ text, children, url }) => {
   return (
-    <div
-      className={`w-full h-13 rounded-xl flex items-center justify-start cursor-pointer p-4  ${isSelected ? "bg-turquoise text-white" : "hover:bg-blue-50"}`}
-      onClick={() => setIsSelected(!isSelected)}
+    <NavLink
+      to={url}
+      className={({ isActive }) =>
+        `w-full h-13 rounded-xl flex items-center justify-start cursor-pointer p-4  ${isActive ? "bg-turquoise text-white" : "hover:bg-blue-50"}`
+      }
     >
       <div className="flex gap-3 items-center">
         {children}
         <p className=" font-semibold text-sm">{text}</p>
       </div>
-    </div>
+    </NavLink>
   );
 };
 
