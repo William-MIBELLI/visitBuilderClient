@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { IShop } from "../Interfaces/Shop.type";
 import type { TAPIResonseData } from "../Interfaces/Generic.type";
+import { toast } from "@heroui/react";
 
 const useShopContextValue = () => {
 
@@ -30,7 +31,7 @@ const useShopContextValue = () => {
       setShops(data.data);
 
     } catch (error: any) {
-      console.error("Can't fetch shops : ", error?.message());
+      toast.danger("Can't fetch shops : ", error?.message());
     }
   }
 
@@ -57,10 +58,21 @@ const useShopContextValue = () => {
 
       console.log("SHOP DETAILS : ", data)
 
-      return data.data
+      const { data: shopData } = data;
+      
+      const mapped = shops.map(shop => {
+        if (shop.id === shopData.id) {
+          return shopData;
+        }
+        return shop;
+      })
+
+      setShops(mapped);
+
+      return shopData;
 
     } catch (error: any) {
-      console.error('Unable to fetch shop by id : ', error?.message);
+      toast.danger('Unable to fetch shop by id : ', error?.message);
       return null
     }
   }
@@ -86,9 +98,28 @@ const useShopContextValue = () => {
 
       return true;
     } catch (error: any) {
-      console.error('Unable to delete this shop : ', error?.message);
+      toast.danger('Unable to delete this shop : ', error?.message)
+      // console.error('Unable to delete this shop : ', error?.message);
       return false;
     }
+  }
+
+  const getShopDetails = async (id: number): Promise<IShop | null> => {
+
+    const shop = shops.find(s => s.id === id);
+
+    if (!shop) {
+      toast.danger(`No Shop with the id ${id}`);
+      return null
+    }
+
+    if (shop.availabilities.length > 0) {
+      return shop;
+    }
+
+    const shopDetails = await fetchShopById(id);
+
+    return shopDetails;
   }
 
   return {
@@ -97,8 +128,8 @@ const useShopContextValue = () => {
     createShop,
     selectedShop,
     setSelectedShop,
-    fetchShopById,
-    deleteShop
+    deleteShop,
+    getShopDetails
   };
 }
 

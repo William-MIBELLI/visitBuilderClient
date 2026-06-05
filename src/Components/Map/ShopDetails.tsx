@@ -21,6 +21,7 @@ import {
   DropdownMenu,
   DropdownPopover,
   Spinner,
+  toast,
 } from "@heroui/react";
 
 interface IProps {
@@ -28,7 +29,7 @@ interface IProps {
 }
 
 const ShopDetails: FC<IProps> = ({ shop }) => {
-  const { fetchShopById, deleteShop } = useShopContext();
+  const { getShopDetails, deleteShop } = useShopContext();
   const [displayPlanning, setDisplayPlanning] = useState<boolean>(false);
   const [avails, setAvails] = useState<IAvailability[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -41,7 +42,7 @@ const ShopDetails: FC<IProps> = ({ shop }) => {
       return;
     }
     setLoading(true);
-    const data = await fetchShopById(shop.id);
+    const data = await getShopDetails(shop.id);
     if (data) {
       setAvails(data.availabilities);
       setDisplayPlanning(true);
@@ -52,6 +53,10 @@ const ShopDetails: FC<IProps> = ({ shop }) => {
   const onDeleteHandler = async () => {
     setLoadingDelete(true);
     const isDeleted = await deleteShop(shop.id);
+
+    if (isDeleted) {
+      toast.success('The shop is successfully deleted.');
+    }
 
     setLoadingDelete(false);
     setIsDeleteOpen(false)
