@@ -65,13 +65,40 @@ const useShopContextValue = () => {
     }
   }
 
+  const deleteShop = async (id: number): Promise<boolean> => {
+    try {
+      const url = import.meta.env.VITE_API_URL + "/shops/" + id;
+
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+
+      if (response.status !== 204) {
+        throw new Error(response.status + ' ' + response.statusText);
+      }
+
+      const filtered = shops.filter(shop => shop.id !== id);
+      setShops(filtered);
+      setSelectedShop(null);
+
+      return true;
+    } catch (error: any) {
+      console.error('Unable to delete this shop : ', error?.message);
+      return false;
+    }
+  }
+
   return {
     shops,
     fetchShops,
     createShop,
     selectedShop,
     setSelectedShop,
-    fetchShopById
+    fetchShopById,
+    deleteShop
   };
 }
 
