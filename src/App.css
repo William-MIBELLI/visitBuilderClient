@@ -7,3 +7,7 @@
   --color-gris: rgb(231 235 240);
   --color-rouge: rgb(229 1 88);
 }
+
+.label_input {
+  @apply text-sm font-semibold text-bleu;
+}

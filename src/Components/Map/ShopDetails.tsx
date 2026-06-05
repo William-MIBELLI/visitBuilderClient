@@ -23,6 +23,7 @@ import {
   Spinner,
   toast,
 } from "@heroui/react";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   shop: IShop;
@@ -35,6 +36,7 @@ const ShopDetails: FC<IProps> = ({ shop }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
   const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const onClickPlanningHandler = async () => {
     if (displayPlanning) {
@@ -91,6 +93,7 @@ const ShopDetails: FC<IProps> = ({ shop }) => {
                 className="hover:bg-turquoise hover:text-white rounded-xl"
                 id="update"
                 textValue="Update"
+                onClick={() => navigate(`/shop/${shop.id}`)}
               >
                 <AlignEndVertical size={15} />
                 <p className="font-semibold text-sm">Update</p>

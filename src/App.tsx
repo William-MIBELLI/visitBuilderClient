@@ -6,6 +6,7 @@ import ShopsRoute from './Routes/ShopsRoute';
 import UsersRoute from './Routes/UsersRoute';
 import MapRoute from './Routes/MapRoute';
 import NotFoundRoute from './Routes/NotFoundRoute';
+import ShopRoute from './Routes/ShopRoute';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='map' element={<MapRoute/> } />
           <Route path='shops' element={<ShopsRoute />} />
           <Route path='users' element={<UsersRoute />} />
+          <Route path='shop/:id' element={<ShopRoute />} />
           <Route path='*' element={<NotFoundRoute />} />
         </Route>
       </Routes>
