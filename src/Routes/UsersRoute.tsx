@@ -1,7 +1,10 @@
+import { Spinner } from "@heroui/react"
 
 const UsersRoute = () => {
   return (
-    <div>UsersRoute</div>
+    <div className="flex items-center justify-center">
+      <Spinner className="animate-spin"/>
+    </div>
   )
 }
 
