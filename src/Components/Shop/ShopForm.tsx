@@ -6,6 +6,7 @@ import { BaseShopSchema } from "../../Validation/Shop.validation";
 import { Button, Checkbox, CheckboxContent, CheckboxControl, CheckboxGroup, CheckboxIndicator, Description, Label } from "@heroui/react";
 import { useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import VisitCheckBoxGroup from "../Forms/VisitCheckBoxGroup";
 
 const ShopForm = () => {
   const {
@@ -27,41 +28,17 @@ const ShopForm = () => {
   };
 
   return (
-    <form className="flex flex-col justify-between h-full" onSubmit={handleSubmit(onSubmitHandler)}>
+    <form className="flex flex-col justify-between h-full bg-green-300  max-w-200 mx-auto" onSubmit={handleSubmit(onSubmitHandler)}>
       <div>
-        <div className="grid grid-cols-2 gap-3 p-4">
+        <div className="grid grid-cols-2 gap-y-3 gap-x-5 p-4">
           <Input label="Place Name" {...register('placeName')} error={errors.placeName} />
           <Input label="Place Code"{...register('placeCode')} error={errors.placeCode} />
-          {/* <AddressInput /> */}
           <Input label="Phone" {...register('phone')} error={errors.phone}/>
           <Input label="Visit Code" {...register('visitCode')} error={errors.visitCode}/>
-          <Input label="Visit Name" {...register('visitName')} error={errors.visitName}/>
-          <div className="flex flex-col gap-1">
-            <Checkbox value="morning">
-              <CheckboxControl>
-                <CheckboxIndicator/>
-              </CheckboxControl>
-              <CheckboxContent>
-                <Label>Morning</Label>
-              </CheckboxContent>
-            </Checkbox>
-            <Checkbox value="lunchbreak">
-              <CheckboxControl>
-                <CheckboxIndicator/>
-              </CheckboxControl>
-              <CheckboxContent>
-                <Label>Lunchbreak</Label>
-              </CheckboxContent>
-            </Checkbox>
-            <Checkbox value="afternoon">
-              <CheckboxControl>
-                <CheckboxIndicator/>
-              </CheckboxControl>
-              <CheckboxContent>
-                <Label>afternoon</Label>
-              </CheckboxContent>
-            </Checkbox>
-          </div>
+          <Input label="Visit Name" {...register('visitName')} error={errors.visitName} />
+          <VisitCheckBoxGroup />
+          <AddressInput />
+          
         </div>
        
         

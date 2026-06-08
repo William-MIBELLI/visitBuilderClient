@@ -29,9 +29,9 @@ const ShopRoute = () => {
   
 
   return (
-    <div className="bg-gray-100 flex flex-col h-full p-3">
+    <div className="bg-white flex flex-col h-full p-3">
       <div className="my-4">
-        <p className="font-extrabold text-2xl text-bleu ">Create a new Shop</p>
+        <p className="font-extrabold text-3xl text-bleu ">Create a new Shop</p>
         <p className="text-xs text-gray-500">Fields with * are required</p>
 
       </div>

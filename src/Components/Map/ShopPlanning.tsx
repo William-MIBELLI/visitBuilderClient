@@ -30,12 +30,12 @@ const ShopPlanning: FC<IProps> = ({ avails }) => {
       <Separator className="my-3" />
       <div className="flex flex-col gap-2">
         {dayNames.map((name, index) => (
-          <div className="flex items-center justify-between text-sm min-h-9">
+          <div key={index} className="flex items-center justify-between text-sm min-h-9">
             <p className="font-semibold">{name}</p>
             <div >
               {regroupedByDay[index] && regroupedByDay[index].length > 0 ? (
                 regroupedByDay[index].map((avail) => (
-                  <p className="text-right text-xs">
+                  <p key={avail.id} className="text-right text-xs">
                     {avail.openTime} - {avail.closeTime}
                   </p>
                 ))

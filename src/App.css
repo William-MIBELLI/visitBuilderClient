@@ -9,5 +9,5 @@
 }
 
 .label_input {
-  @apply text-sm font-semibold text-bleu;
+  @apply text-xs font-semibold text-bleu;
 }

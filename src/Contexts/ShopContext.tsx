@@ -31,7 +31,7 @@ const useShopContextValue = () => {
       setShops(data.data);
 
     } catch (error: any) {
-      toast.danger("Can't fetch shops : ", error?.message());
+      toast.danger("Can't fetch shops : ", error?.message);
     }
   }
 

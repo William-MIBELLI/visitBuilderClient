@@ -1,10 +1,14 @@
-import { InputGroup, InputGroupInput, InputGroupSuffix } from "@heroui/react";
+import { InputGroup, InputGroupInput, InputGroupSuffix, type InputProps } from "@heroui/react";
 import { fetchAddressListFromAPI } from "../../Utils/AddressAPI";
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type FC } from "react";
 import type { AddressFeature } from "../../Interfaces/Address.type";
 import { Check } from "lucide-react";
 
-const AddressInput = () => {
+interface IProps extends InputProps {
+
+}
+
+const AddressInput: FC<IProps> = (props) => {
   const [list, setList] = useState<AddressFeature[] | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<AddressFeature | null>(
     null,
@@ -33,7 +37,7 @@ const AddressInput = () => {
 
 
   return (
-    <div className="flex flex-col relative h-15">
+    <div className="flex flex-col relative h-15 col-span-2">
       <label className="label_input" htmlFor="address">
         Address
       </label>
