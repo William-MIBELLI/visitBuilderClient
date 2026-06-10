@@ -3,12 +3,15 @@ import { fetchAddressListFromAPI } from "../../Utils/AddressAPI";
 import { useState, type ChangeEvent, type FC } from "react";
 import type { AddressFeature } from "../../Interfaces/Address.type";
 import { Check } from "lucide-react";
+import type { TAddressSchema } from "../../Validation/Address.validation";
 
-interface IProps extends InputProps {
-
+interface IProps  {
+  onChange: (address: TAddressSchema | undefined) => void
 }
 
-const AddressInput: FC<IProps> = (props) => {
+
+
+const AddressInput: FC<IProps> = ({ onChange }) => {
   const [list, setList] = useState<AddressFeature[] | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<AddressFeature | null>(
     null,
@@ -29,23 +32,33 @@ const AddressInput: FC<IProps> = (props) => {
 
     setList(data);
   };
-
+  
   const onSelectHandler = (address: AddressFeature) => {
     setSelectedAddress(address);
     setValue(address.properties.label);
+    const ad: TAddressSchema = {
+      city: address.properties.city,
+      country: "France",
+      lat: address.geometry.coordinates[1],
+      lng: address.geometry.coordinates[0],
+      postalCode: address.properties.postcode,
+      street: address.properties.name
+    }
+    onChange(ad);
   };
 
 
   return (
-    <div className="flex flex-col relative h-15 col-span-2">
+    <div className="flex flex-col relative h-15">
       <label className="label_input" htmlFor="address">
         Address
       </label>
-      <InputGroup>
+      <InputGroup className="ring-bleu">
         <InputGroupInput
           value={value}
           onChange={onAddressChange}
           placeholder="Start typing address, then select on the list"
+          
         />
         {
           selectedAddress && (

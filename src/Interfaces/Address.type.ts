@@ -25,7 +25,7 @@ export interface AddressProperties {
   housenumber?: string;
   id: string;
   banId?: string;
-  name: string;
+  name: string; //Numéro + rue
   postcode: string;
   citycode: string;
   oldcitycode?: string; // Optionnel (présent dans l'exemple de Lille)

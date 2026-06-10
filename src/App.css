@@ -11,3 +11,7 @@
 .label_input {
   @apply text-xs font-semibold text-bleu;
 }
+
+.error_input {
+  @apply text-rouge text-center font-semibold text-xs;
+}
