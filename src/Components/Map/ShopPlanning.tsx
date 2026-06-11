@@ -1,21 +1,22 @@
 import type { FC } from "react";
 import { dayNames, type IAvailability } from "../../Interfaces/Availability.type";
 import { Separator } from "@heroui/react";
+import { regroupAvailabilitiesByDay } from "../../Utils/Mapping";
 
 interface IProps {
   avails: IAvailability[];
 }
 const ShopPlanning: FC<IProps> = ({ avails }) => {
   
-  const regroupedByDay: { [Key: number]: IAvailability[] } = {};
+  const regroupedByDay = regroupAvailabilitiesByDay(avails);
 
-  avails.forEach((avail) => {
-    if (Object.keys(regroupedByDay).includes((avail.dayOfWeek - 1).toString())) {
-      regroupedByDay[avail.dayOfWeek - 1].push(avail);
-      return;
-    }
-    regroupedByDay[avail.dayOfWeek - 1] = [avail];
-  });
+  // avails.forEach((avail) => {
+  //   if (Object.keys(regroupedByDay).includes((avail.dayOfWeek - 1).toString())) {
+  //     regroupedByDay[avail.dayOfWeek - 1].push(avail);
+  //     return;
+  //   }
+  //   regroupedByDay[avail.dayOfWeek - 1] = [avail];
+  // });
 
   return (
     <div>

@@ -59,6 +59,7 @@ const useShopContextValue = () => {
 
       const data: TAPIResonseData<IShop> = await response.json();
 
+      console.log('DATA : ', data);
       if (data.status !== "success" || data.errors) {
         throw new Error(data.errors);
       }

@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import VisitCheckBoxGroup from "../Forms/VisitCheckBoxGroup";
 import FormDivider from "../Forms/FormDivider";
-import AddAvailabilityButton from "../Forms/AddAvailabilityButton";
 import { useShopContext } from "../../Contexts/ShopContext";
 import DatePicker from "../Forms/DatePicker";
 import AvailabilityForm from "../Availability/AvailabilityForm";
@@ -50,7 +49,7 @@ const ShopForm = () => {
         onSubmit={handleSubmit(onSubmitHandler)}
       >
         <div>
-          <div className="grid grid-cols-2 gap-y-3 gap-x-5">
+          <div className="grid bg-yellow-200 grid-cols-2 gap-y-3 gap-x-5">
             <FormDivider label="Infos" />
             <Input
               label="Place Name"
@@ -111,9 +110,9 @@ const ShopForm = () => {
             />
 
             <FormDivider label="Availabilities" />
-            <AddAvailabilityButton />
-            <AvailabilityForm/>
+            {/* <AddAvailabilityButton /> */}
           </div>
+            <AvailabilityForm/>
         </div>
         <Button
           fullWidth
