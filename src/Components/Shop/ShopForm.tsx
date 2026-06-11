@@ -1,4 +1,4 @@
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import AddressInput from "../Forms/AddressInput";
 import Input from "../Forms/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +11,7 @@ import FormDivider from "../Forms/FormDivider";
 import AddAvailabilityButton from "../Forms/AddAvailabilityButton";
 import { useShopContext } from "../../Contexts/ShopContext";
 import DatePicker from "../Forms/DatePicker";
+import AvailabilityForm from "../Availability/AvailabilityForm";
 
 const ShopForm = () => {
   const { createShop } = useShopContext();
@@ -42,90 +43,95 @@ const ShopForm = () => {
   };
 
   return (
-    <form
-      className="flex flex-col justify-between h-full  max-w-200 mx-auto"
-      onSubmit={handleSubmit(onSubmitHandler)}
-    >
-      <div>
-        <div className="grid grid-cols-2 gap-y-3 gap-x-5">
-          <FormDivider label="Infos" />
-          <Input
-            label="Place Name"
-            {...register("placeName")}
-            error={errors.placeName}
-          />
-          <Input
-            label="Place Code"
-            {...register("placeCode")}
-            error={errors.placeCode}
-          />
-          <Input label="Phone" {...register("phone")} error={errors.phone} />
-          <Controller
-            control={control}
-            name="address"
-            render={({ field: { onChange } }) => (
-              <AddressInput onChange={onChange} />
-            )}
-          />
-          <FormDivider label="Visit" />
-          <Input
-            label="Visit Code"
-            {...register("visitCode")}
-            error={errors.visitCode}
-          />
-          <Input
-            label="Visit Name"
-            {...register("visitName")}
-            error={errors.visitName}
-          />
-          <Controller
-            control={control}
-            name="visitConstraint"
-            render={({ field: { onChange } }) => (
-              <VisitCheckBoxGroup onChange={onChange} />
-            )}
-          />
-          <Input
-            type="number"
-            label="Cost"
-            {...register("cost", { setValueAs: (value) => +value })}
-            error={errors.cost}
-          />
-          <Controller
-            control={control}
-            name="startDate"
-            render={({ field: { onChange }, formState: { errors } }) => (
-              <DatePicker label="Start Date" onChange={onChange} error={errors.startDate} />
-            )}
-          />
-          <Controller
-            control={control}
-            name="endDate"
-            render={({ field: { onChange } }) => (
-              <DatePicker label="End date" onChange={onChange} error={errors.endDate} />
-            )}
-          />
+    <FormProvider {...methods}>
 
-          <FormDivider label="Availabilities" />
-          <AddAvailabilityButton />
-        </div>
-      </div>
-      <Button
-        fullWidth
-        className="rounded-xl bg-bleu text-white flex items-center"
-        type="submit"
-        isPending={loading}
+      <form
+        className="flex flex-col justify-between h-full  max-w-200 mx-auto"
+        onSubmit={handleSubmit(onSubmitHandler)}
       >
-        <p>Create Shop</p>
-        {loading ? (
-          <div className="flex justify-center items-center">
-            <Spinner size="sm" color="current" />
+        <div>
+          <div className="grid grid-cols-2 gap-y-3 gap-x-5">
+            <FormDivider label="Infos" />
+            <Input
+              label="Place Name"
+              {...register("placeName")}
+              error={errors.placeName}
+              
+            />
+            <Input
+              label="Place Code"
+              {...register("placeCode")}
+              error={errors.placeCode}
+            />
+            <Input label="Phone" {...register("phone")} error={errors.phone} />
+            <Controller
+              control={control}
+              name="address"
+              render={({ field: { onChange } }) => (
+                <AddressInput onChange={onChange} />
+              )}
+            />
+            <FormDivider label="Visit" />
+            <Input
+              label="Visit Code"
+              {...register("visitCode")}
+              error={errors.visitCode}
+            />
+            <Input
+              label="Visit Name"
+              {...register("visitName")}
+              error={errors.visitName}
+            />
+            <Controller
+              control={control}
+              name="visitConstraint"
+              render={({ field: { onChange } }) => (
+                <VisitCheckBoxGroup onChange={onChange} />
+              )}
+            />
+            <Input
+              type="number"
+              label="Cost"
+              {...register("cost", { setValueAs: (value) => +value })}
+              error={errors.cost}
+            />
+            <Controller
+              control={control}
+              name="startDate"
+              render={({ field: { onChange }, formState: { errors } }) => (
+                <DatePicker label="Start Date" onChange={onChange} error={errors.startDate} />
+              )}
+            />
+            <Controller
+              control={control}
+              name="endDate"
+              render={({ field: { onChange } }) => (
+                <DatePicker label="End date" onChange={onChange} error={errors.endDate} />
+              )}
+            />
+
+            <FormDivider label="Availabilities" />
+            <AddAvailabilityButton />
+            <AvailabilityForm/>
           </div>
-        ) : (
-          <ArrowRight />
-        )}
-      </Button>
-    </form>
+        </div>
+        <Button
+          fullWidth
+          className="rounded-xl bg-bleu text-white flex items-center"
+          type="submit"
+          isPending={loading}
+        >
+          <p>Create Shop</p>
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <Spinner size="sm" color="current" />
+            </div>
+          ) : (
+            <ArrowRight />
+          )}
+        </Button>
+      </form>
+    </FormProvider>
   );
 };
 

@@ -1,20 +1,12 @@
 import type { FC } from "react";
-import type { IAvailability } from "../../Interfaces/Availability.type";
+import { dayNames, type IAvailability } from "../../Interfaces/Availability.type";
 import { Separator } from "@heroui/react";
 
 interface IProps {
   avails: IAvailability[];
 }
 const ShopPlanning: FC<IProps> = ({ avails }) => {
-  const dayNames = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  
   const regroupedByDay: { [Key: number]: IAvailability[] } = {};
 
   avails.forEach((avail) => {
