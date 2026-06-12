@@ -25,7 +25,6 @@ const useShopContextValue = () => {
         throw new Error(data.errors);
       }
 
-      console.log("DATA : ", data);
       setShops(data.data);
     } catch (error: any) {
       toast.danger("Can't fetch shops : ", error?.message);
@@ -45,7 +44,6 @@ const useShopContextValue = () => {
       type: "Shop"
     };
 
-    console.log("FINAL BODY : ", finalBody);
 
     try {
       const url = import.meta.env.VITE_API_URL + "/shops/";
@@ -59,7 +57,6 @@ const useShopContextValue = () => {
 
       const data: TAPIResonseData<IShop> = await response.json();
 
-      console.log('DATA : ', data);
       if (data.status !== "success" || data.errors) {
         throw new Error(data.errors);
       }
@@ -90,7 +87,6 @@ const useShopContextValue = () => {
         throw new Error(data.errors);
       }
 
-      console.log("SHOP DETAILS : ", data);
 
       const { data: shopData } = data;
 

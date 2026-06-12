@@ -17,6 +17,8 @@ export interface IShop {
   canBeLunchBreak: boolean;
   canBeMorning: boolean;
   availabilities: IAvailability[];
+  createdAt: string;
+  cost: number;
 }
 
  

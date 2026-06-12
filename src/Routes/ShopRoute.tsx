@@ -36,7 +36,7 @@ const ShopRoute = () => {
 
       </div>
       <Separator className="my-3 bg-turquoise"/>
-      <ShopForm/>
+      <ShopForm shop={shop}/>
     </div>
   )
 }

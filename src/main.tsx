@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ToastProvider placement='top end'/>
     <ShopContextProvider>
-      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY} onLoad={() => console.log('API successfully loaded !')}>
+      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
         <App />
       </APIProvider>
     </ShopContextProvider>

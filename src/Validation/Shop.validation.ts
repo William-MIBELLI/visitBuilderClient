@@ -31,7 +31,7 @@ export const BaseShopSchema = z.object({
   createdAt: z.iso.date(),
   startDate: z.iso.date().optional(),
   endDate: z.iso.date().optional(),
-  cost: z.number().positive(),
+  cost: z.string(),
   availabilities: z.array(BaseAvailabilitySchema),
 });
 
@@ -56,3 +56,5 @@ export const CreateShopSchema = BaseShopSchema.omit({
   });
 
 export type TCreateShopSChema = z.infer<typeof CreateShopSchema>;
+
+export type TShopCreationKey = keyof TCreateShopSChema;

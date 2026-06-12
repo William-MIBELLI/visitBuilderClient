@@ -1,5 +1,5 @@
 export interface IAvailability {
-  id: number | string;
+  id: string;
   dayOfWeek: number;
   openTime: string;
   closeTime: string;

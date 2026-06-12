@@ -9,22 +9,17 @@ import type {
   TvisitConstraintKey,
   TVisitConstraintSchema,
 } from "../../Validation/Shop.validation";
-import { useState, type FC } from "react";
+import { type FC } from "react";
 
 interface IProps {
   onChange: (constraint: TVisitConstraintSchema | undefined) => void;
+  value: TVisitConstraintSchema
 }
 
-const VisitCheckBoxGroup: FC<IProps> = ({ onChange }) => {
-  const [constraints, setConstraints] = useState<TVisitConstraintSchema>({
-    canBeAfternoon: false,
-    canBeLunchBreak: false,
-    canBeMorning: false,
-  });
+const VisitCheckBoxGroup: FC<IProps> = ({ onChange, value }) => {
 
   const onChangeHandler = (key: TvisitConstraintKey, isSelected: boolean) => {
-    const newConstraints: TVisitConstraintSchema = { ...constraints, [key]: isSelected };
-    setConstraints(newConstraints);
+    const newConstraints: TVisitConstraintSchema = { ...value, [key]: isSelected };
     onChange(newConstraints);
   };
 
@@ -35,7 +30,7 @@ const VisitCheckBoxGroup: FC<IProps> = ({ onChange }) => {
       </label>
       <div id="checkbox_group" className="flex justify-evenly gap-3 grow">
         <Checkbox
-          value="morning"
+          isSelected={value?.canBeMorning}
           onChange={(isSelected) => onChangeHandler("canBeMorning", isSelected)}
         >
           <CheckboxControl color="green">
@@ -48,6 +43,7 @@ const VisitCheckBoxGroup: FC<IProps> = ({ onChange }) => {
 
         <Checkbox
           value="lunchbreak"
+          isSelected={value?.canBeLunchBreak}
           onChange={(isSelected) =>
             onChangeHandler("canBeLunchBreak", isSelected)
           }
@@ -62,6 +58,7 @@ const VisitCheckBoxGroup: FC<IProps> = ({ onChange }) => {
 
         <Checkbox
           value="afternoon"
+          isSelected={value?.canBeAfternoon}
           onChange={(isSelected) =>
             onChangeHandler("canBeAfternoon", isSelected)
           }

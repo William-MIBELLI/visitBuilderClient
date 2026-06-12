@@ -25,13 +25,12 @@ import {
   type TCreateAvailavbilitySchema,
 } from "../../Validation/Availability.validation";
 import { Time } from "@internationalized/date";
-import { useEffect } from "react";
 import type { TCreateShopSChema } from "../../Validation/Shop.validation";
 import AvailabilityList from "./AvailabilityList";
 
 const AvailabilityForm = () => {
   const { control: parentControl } = useFormContext<TCreateShopSChema>();
-  const { append, fields } = useFieldArray({
+  const { append, fields, remove } = useFieldArray({
     control: parentControl,
     name: "availabilities",
   });
@@ -40,7 +39,6 @@ const AvailabilityForm = () => {
     handleSubmit,
     reset,
     control,
-    formState: { errors },
   } = useForm({
     resolver: zodResolver(CreateAvailabilitySchema),
     defaultValues: {
@@ -50,7 +48,6 @@ const AvailabilityForm = () => {
     },
   });
 
-  useEffect(() => console.log("ERRORS AVAILS: ", errors), [errors]);
 
   const onAddAvailability = (data: TCreateAvailavbilitySchema) => {
     append(data);
@@ -60,7 +57,7 @@ const AvailabilityForm = () => {
   return (
     <div className="flex flex-col ">
 
-      <AvailabilityList avails={fields}/>
+      <AvailabilityList avails={fields} remove={remove}/>
 
       <div className="grid grid-cols-10 col-span-2 gap-x-3 items-end">
 

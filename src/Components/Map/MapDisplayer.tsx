@@ -1,15 +1,9 @@
 import {
-  AdvancedMarker,
-  InfoWindow,
-  Map,
-  Pin,
-  useAdvancedMarkerRef,
-  useMap,
+  Map, useMap
 } from "@vis.gl/react-google-maps";
 import type { IShop } from "../../Interfaces/Shop.type";
-import { useCallback, useEffect, useRef, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 import { MarkerClusterer, type Marker } from "@googlemaps/markerclusterer";
-import { EllipsisVertical, Phone, PhoneMissed } from "lucide-react";
 import ShopMarker from "./ShopMarker";
 import { useShopContext } from "../../Contexts/ShopContext";
 import ShopDetails from "./ShopDetails";
@@ -29,7 +23,6 @@ const MapDisplayer: FC<IProps> = ({ shops }) => {
     if (!clusterer.current) {
       clusterer.current = new MarkerClusterer({ map });
     }
-    console.log("MAP : ", map.getBounds());
   }, [map]);
 
   useEffect(() => {

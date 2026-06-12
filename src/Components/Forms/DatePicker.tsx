@@ -1,31 +1,48 @@
 import {
   Label,
-  DateField, Calendar,
+  DateField,
+  Calendar,
   DatePicker as DP,
-  type DateValue
+  type DateValue,
 } from "@heroui/react";
-import type { CalendarDate, CalendarDateTime, ZonedDateTime } from "@internationalized/date";
-import { useState, type FC } from "react";
+import {
+  CalendarDate, type CalendarDateTime,
+  type ZonedDateTime
+} from "@internationalized/date";
+import { useEffect, useState, type FC } from "react";
 import type { FieldError } from "react-hook-form";
 
 interface IProps {
   label: string;
   onChange: (value?: string) => void;
   error?: FieldError;
+  value: string | undefined;
 }
 
-const DatePicker: FC<IProps> = ({ label, onChange, error }) => {
+const DatePicker: FC<IProps> = ({ label, onChange, error, value }) => {
+  const [val, setVal] = useState<DateValue | null>(null);
 
-  const [value, setValue] = useState<DateValue | null>(null);
-
-  const onChangeHandler = (value: CalendarDate | CalendarDateTime | ZonedDateTime | null) => {
-    setValue(value);
+  const onChangeHandler = (
+    value: CalendarDate | CalendarDateTime | ZonedDateTime | null,
+  ) => {
+    setVal(value);
     onChange(value?.toString());
-  }
+  };
+
+  useEffect(() => {
+    if (!value) return;
+    const date = new Date(value);
+    const dateValue = new CalendarDate(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+    );
+    onChange(dateValue.toString());
+  }, [value]);
 
   return (
     <div className="flex  flex-col gap-4">
-      <DP name="date" value={value} onChange={onChangeHandler}>
+      <DP name="date" value={val} onChange={onChangeHandler}>
         <Label className="label_input">{label}</Label>
         <DateField.Group fullWidth>
           <DateField.Input>
@@ -62,7 +79,7 @@ const DatePicker: FC<IProps> = ({ label, onChange, error }) => {
             </Calendar.YearPickerGrid>
           </Calendar>
         </DP.Popover>
-      {error && <p className="error_input">{error.message}</p>}
+        {error && <p className="error_input">{error.message}</p>}
       </DP>
     </div>
   );

@@ -7,7 +7,7 @@ import CreateButton from "./CreateButton";
 const Sidenav = () => {
 
   return (
-    <div className="bg-white w-1/4 p-3 flex flex-col justify-between">
+    <div className="bg-white w-1/4 p-3 flex flex-col justify-between h-full">
       <div className=" flex flex-col gap-3 items-center mt-3">
         <MenuButton text="Map" url="map" >
           <Map/>
