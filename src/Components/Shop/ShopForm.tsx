@@ -3,7 +3,8 @@ import AddressInput from "../Forms/AddressInput";
 import Input from "../Forms/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  CreateShopSchema
+  CreateShopSchema,
+  type TCreateShopSChema
 } from "../../Validation/Shop.validation";
 import { Button, Spinner } from "@heroui/react";
 import { useEffect, useState, type FC } from "react";
@@ -18,14 +19,23 @@ import { mapShopForZod } from "../../Utils/Mapping";
 
 interface IProps {
   shop?: IShop | null;
+  submitLabel: string;
+  submit: (data: any) => void;
 }
 
-const ShopForm: FC<IProps> = ({ shop }) => {
+const ShopForm: FC<IProps> = ({ shop, submitLabel, submit }) => {
   const { createShop } = useShopContext();
   const [loading, setLoading] = useState<boolean>(false);
 
   const methods = useForm({
     resolver: zodResolver(CreateShopSchema),
+    defaultValues: {
+      visitConstraint: {
+        canBeAfternoon: false,
+        canBeLunchBreak: false,
+        canBeMorning: false
+      }
+    }
   });
 
   const {
@@ -40,11 +50,14 @@ const ShopForm: FC<IProps> = ({ shop }) => {
     reset(mapShopForZod(shop));
   }, [shop, reset]);
 
+  useEffect(() => console.log('ERRORS: ', errors), [errors]);
+
   const onSubmitHandler = async (data: any) => {
-    setLoading(true);
-    const newShop = await createShop(data);
-    console.log("NEW SHOP", newShop);
-    setLoading(false);
+    submit(data);
+    // setLoading(true);
+    // const newShop = await createShop(data);
+    // console.log("NEW SHOP", newShop);
+    // setLoading(false);
   };
 
   return (
@@ -89,7 +102,7 @@ const ShopForm: FC<IProps> = ({ shop }) => {
                   label="Start Date"
                   onChange={onChange}
                   error={errors.startDate}
-                  value={value}
+                  value={value ?? undefined}
                 />
               )}
             />
@@ -101,7 +114,7 @@ const ShopForm: FC<IProps> = ({ shop }) => {
                   label="End date"
                   onChange={onChange}
                   error={errors.endDate}
-                  value={value}
+                  value={value ?? undefined}
                 />
               )}
             />
@@ -119,7 +132,7 @@ const ShopForm: FC<IProps> = ({ shop }) => {
           type="submit"
           isPending={loading}
         >
-          <p>Create Shop</p>
+          <p>{submitLabel}</p>
           {loading ? (
             <div className="flex justify-center items-center">
               <Spinner size="sm" color="current" />

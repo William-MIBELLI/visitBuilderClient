@@ -29,9 +29,9 @@ export const BaseShopSchema = z.object({
   visitName: z.string().nonempty(),
   visitConstraint: VisitConstraintSchema,
   createdAt: z.iso.date(),
-  startDate: z.iso.date().optional(),
-  endDate: z.iso.date().optional(),
-  cost: z.string(),
+  startDate: z.iso.date().nullable(),
+  endDate: z.iso.date().nullable(),
+  cost: z.string().regex(/\d/g),
   availabilities: z.array(BaseAvailabilitySchema),
 });
 

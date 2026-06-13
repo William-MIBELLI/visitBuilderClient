@@ -6,7 +6,8 @@ import ShopsRoute from './Routes/ShopsRoute';
 import UsersRoute from './Routes/UsersRoute';
 import MapRoute from './Routes/MapRoute';
 import NotFoundRoute from './Routes/NotFoundRoute';
-import ShopRoute from './Routes/ShopRoute';
+import CreateShopRoute from './Routes/CreateShopRoute';
+import UpdateShopRoute from './Routes/UpdateShopRoute';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
           <Route path='map' element={<MapRoute/> } />
           <Route path='shops' element={<ShopsRoute />} />
           <Route path='users' element={<UsersRoute />} />
-          <Route path='shop/:id' element={<ShopRoute />} />
+          <Route path='shops/:id' element={<UpdateShopRoute />} />
+          <Route path='shops/new' element={<CreateShopRoute />} />
           <Route path='*' element={<NotFoundRoute />} />
         </Route>
       </Routes>

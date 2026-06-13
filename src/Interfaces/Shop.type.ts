@@ -19,6 +19,8 @@ export interface IShop {
   availabilities: IAvailability[];
   createdAt: string;
   cost: number;
+  startDate: string;
+  endDate: string;
 }
 
  

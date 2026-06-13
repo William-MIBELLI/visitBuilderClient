@@ -26,6 +26,7 @@ export const regroupAvailabilitiesByDay = (
 
 export const mapShopForZod = (shop: IShop): TBaseShopSchema => {
 
+  console.log('SHOP DANS MAPPING : ', shop);
   const {
     address: street,
     postalCode,
@@ -58,6 +59,8 @@ export const mapShopForZod = (shop: IShop): TBaseShopSchema => {
     ...rest,
     address,
     visitConstraint: constraints,
+    cost: shop.cost.toString(),
+    
   };
 
   return mappedShop;
